@@ -2,23 +2,33 @@ using UnityEngine;
 
 public class Mover : MonoBehaviour
 {
-    [SerializeField] float xValue = 0f;
-    [SerializeField] float yValue = 0.02f;
-    [SerializeField] float zValue = 0;
+    [SerializeField] private float moveSpeed = 6.2f;
+
     // Start is called before the first frame update
     void Start()
     {
+        PrintInstructions();
+    }
+
+// Update is called once per frame
+    private void Update()
+    {
+        MovePlayer();
         
     }
 
-    private void Update()
+    void PrintInstructions()
     {
-        Update(zValue);
+        Debug.Log("Welcome to my game!!!!!");
+        Debug.Log("Use the WASD or arrow keys");
+        Debug.Log("Don't hit the walls");
     }
 
-    // Update is called once per frame
-    void Update(float zValue)
+    void MovePlayer()
     {
-        transform.Translate(xValue,yValue, zValue);
+        
+        float xValue = Input.GetAxis("Horizontal") * (moveSpeed * Time.deltaTime);
+        float zValue = Input.GetAxis("Vertical") * (moveSpeed * Time.deltaTime);
+        transform.Translate(xValue, 0, zValue);
     }
 }
